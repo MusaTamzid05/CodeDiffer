@@ -2,29 +2,22 @@ package main
 
 import (
 	"code_diff/diff"
-	//"log"
-	"fmt"
-	//"flag"
+	"log"
+	"flag"
 )
 
 
 func main() {
-	/*
-	filePathPtr := flag.String("filePath", "./test.txt", "file path for reading code")
+	firstFilePathPtr := flag.String("firstFile", "./sample/test.c", "path for the first file")
+	secondPathPtr := flag.String("secondFile", "./sample/test2.c", "file path for second file")
 	flag.Parse()
 
-
-	lineContrainer, err := diff.NewLineContainer(*filePathPtr)
+	diff, err := diff.NewDiff(*firstFilePathPtr, *secondPathPtr)
 
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	//fmt.Println(lineContrainer.String())
-	*/
+	diff.Run()
 
-	preprocessor := diff.Preprocessor{}
-	fmt.Println(preprocessor.Process("let var_data = 12"))
-	fmt.Println(preprocessor.Process("def test_data(val_data, val_2)"))
-	fmt.Println(preprocessor.Process("__data"))
 }

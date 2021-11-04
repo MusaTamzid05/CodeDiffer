@@ -8,6 +8,10 @@ type Preprocessor struct {
 
 }
 
+func NewPreprocessor() *Preprocessor {
+	return &Preprocessor{}
+}
+
 func (p* Preprocessor) Process(line string) string  {
 	newLine := ""
 	capitalizeChar := false
