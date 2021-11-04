@@ -2,6 +2,7 @@ package diff
 
 import (
 	"fmt"
+	"strings"
 )
 
 type LineData struct {
@@ -37,9 +38,17 @@ func NewLineContainer(filePath string) (*LineDataContainer, error){
 	}
 
 	lineData := []*LineData{}
+	newIndex := 0
 
 	for index, line := range lines {
-		lineData = append(lineData, NewLineData(line, index, 0))
+		trimLine := strings.Trim(line, " ")
+		
+		if len(trimLine) == 0 {
+			continue
+		}
+
+		lineData = append(lineData, NewLineData(line, index, newIndex))
+		newIndex += 1
 	}
 
 	lineDataContainer := LineDataContainer{}
