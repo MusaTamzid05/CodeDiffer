@@ -3,17 +3,17 @@ package main
 import (
 	"code_diff/diff"
 	"log"
+	"fmt"
 )
 
 
 func main() {
-	lines, err := diff.Read("./main.go")
+	lineContrainer, err := diff.NewLineContainer("./test.txt")
 
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	for _, line := range lines {
-		log.Println(line)
-	}
+	fmt.Println(lineContrainer.String())
+
 }
