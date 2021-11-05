@@ -18,6 +18,8 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	diff.Run()
+	result := diff.Run()
+
+	log.Println(result.Count)
 
 }

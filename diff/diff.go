@@ -9,6 +9,24 @@ type Diff struct {
 	SecondLineContainer *LineDataContainer
 }
 
+type DiffData struct {
+	LineData1 *LineData
+	LineData2 *LineData
+}
+
+func NewDiffData(lineData1, lineData2  *LineData) *DiffData {
+	return &DiffData{LineData1 : lineData1, LineData2 : lineData2}
+}
+
+type DiffResult struct {
+	Count int
+	Data []*DiffData
+}
+
+func NewDiffResult() *DiffResult {
+	return &DiffResult{Count: 0}
+}
+
 func NewDiff(firstFilePath, secondFilePath string) (*Diff, error){
 	firstLineContainer, err := NewLineContainer(firstFilePath)
 
@@ -26,8 +44,9 @@ func NewDiff(firstFilePath, secondFilePath string) (*Diff, error){
 	return &Diff{FirstLineContainer : firstLineContainer , SecondLineContainer : secondLineContainer}, nil
 }
 
-func (d *Diff) Run() {
+func (d *Diff) Run() *DiffResult  {
 
+	diffResult := NewDiffResult()
 	preprocessor := NewPreprocessor()
 
 	for i, firstLineData := range d.FirstLineContainer.LineData {
@@ -41,9 +60,14 @@ func (d *Diff) Run() {
 			fmt.Println(firstLineData.String())
 			fmt.Println(secondLineData.String())
 			fmt.Println("========================")
+
+			diffResult.Count += 1
+			diffResult.Data = append(diffResult.Data, NewDiffData(firstLineData, secondLineData))
 		}
 
 
 	}
+
+	return diffResult
 
 }
