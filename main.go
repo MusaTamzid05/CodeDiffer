@@ -2,8 +2,8 @@ package main
 
 import (
 	"code_diff/diff"
-	"log"
 	"flag"
+	"fmt"
 )
 
 
@@ -15,11 +15,12 @@ func main() {
 	diff, err := diff.NewDiff(*firstFilePathPtr, *secondPathPtr)
 
 	if err != nil {
-		log.Fatalln(err)
+		fmt.Println(err)
+		return
 	}
 
 	result := diff.Run()
 
-	log.Println(result.Count)
+	fmt.Println(result.Count)
 
 }

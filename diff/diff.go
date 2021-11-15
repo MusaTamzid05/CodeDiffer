@@ -9,18 +9,59 @@ type Diff struct {
 	SecondLineContainer *LineDataContainer
 }
 
-type DiffData struct {
-	LineData1 *LineData
-	LineData2 *LineData
+// This LineDiff struct is used
+// to contain the difference in
+// each line.
+
+type LineDiffData struct {
+	missMatchString1 string
+	missMatchString2 string
 }
 
-func NewDiffData(lineData1, lineData2  *LineData) *DiffData {
-	return &DiffData{LineData1 : lineData1, LineData2 : lineData2}
+type LineDiff struct {
+	DiffData []*LineDiffData
 }
+
+func getMissMatch(index int, str1, str2 string) (int, *LineDiffData ){
+	charIndex := index
+	missMatchString1 := ""
+	missMatchString2 := ""
+
+	for string(str1[charIndex]) != string(str2[charIndex]) {
+		missMatchString1 += string(str1[charIndex])
+		missMatchString2 += string(str2[charIndex])
+		charIndex += 1
+	}
+
+	return charIndex, &LineDiffData{missMatchString1 : missMatchString1, missMatchString2 : missMatchString2}
+}
+
+func NewLineDiff(line1, line2 string) *LineDiff {
+	diffs := []*LineDiffData{}
+	charIndex := 0
+	missMatchLineData := &LineDiffData{}
+
+	for charIndex < len(line1) {
+		if line1[charIndex] != line2[charIndex] {
+			charIndex, missMatchLineData = getMissMatch(charIndex, line1, line2)
+			diffs = append(diffs, missMatchLineData)
+			continue
+		}
+		charIndex += 1
+
+	}
+
+
+
+	lineDiff := LineDiff{DiffData : diffs}
+
+	return &lineDiff
+}
+
 
 type DiffResult struct {
 	Count int
-	Data []*DiffData
+	LineDiffs []*LineDiff
 }
 
 func NewDiffResult() *DiffResult {
@@ -62,7 +103,7 @@ func (d *Diff) Run() *DiffResult  {
 			fmt.Println("========================")
 
 			diffResult.Count += 1
-			diffResult.Data = append(diffResult.Data, NewDiffData(firstLineData, secondLineData))
+			diffResult.LineDiffs = append(diffResult.LineDiffs, NewLineDiff(firstProcessedLine, secondProcessedLine) )
 		}
 
 
