@@ -8,8 +8,8 @@ import (
 
 
 func main() {
-	firstFilePathPtr := flag.String("firstFile", "./sample/test.c", "path for the first file")
-	secondPathPtr := flag.String("secondFile", "./sample/test2.c", "file path for second file")
+	firstFilePathPtr := flag.String("firstFile", "./sample/test5.py", "path for the first file")
+	secondPathPtr := flag.String("secondFile", "./sample/test6.py", "file path for second file")
 	flag.Parse()
 
 	diff, err := diff.NewDiff(*firstFilePathPtr, *secondPathPtr)

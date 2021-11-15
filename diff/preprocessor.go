@@ -13,6 +13,7 @@ func NewPreprocessor() *Preprocessor {
 }
 
 func (p* Preprocessor) Process(line string) string  {
+	line = p.removeSpace(line)
 	newLine := ""
 	capitalizeChar := false
 
@@ -37,5 +38,17 @@ func (p* Preprocessor) Process(line string) string  {
 	}
 
 
+	return newLine
+}
+
+func (p* Preprocessor) removeSpace(line string) string {
+	newLine := ""
+
+	for _, c := range line {
+		if string(c) == " " {
+			continue
+		}
+		newLine += string(c)
+	}
 	return newLine
 }
