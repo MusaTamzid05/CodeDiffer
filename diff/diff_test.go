@@ -49,3 +49,29 @@ func TestIsFilePathStr(t *testing.T) {
 		t.Errorf("filepath is not detected properly.")
 	}
 }
+
+func TestStringConstructorDiff(t *testing.T) {
+	diff, err := NewDiff("let a_data = 0", "let aData = 0")
+
+	if err != nil {
+		t.Errorf("Error opening file, Error Message :%s", err)
+	}
+
+	result := diff.Run()
+
+	if result.Count != 0 {
+		t.Errorf("Count found %d,expected %d", 0, result.Count)
+	}
+
+	diff2, err := NewDiff("let a = b + d", "let a = b - d")
+
+	if err != nil {
+		t.Errorf("Error opening file, Error Message :%s", err)
+	}
+
+	result = diff2.Run()
+
+	if result.Count != 1 {
+		t.Errorf("Count found %d,expected %d", 0, result.Count)
+	}
+}
