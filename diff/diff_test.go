@@ -37,3 +37,16 @@ func TestDoesNotShowCaseDiffWhenTwoCaseDiff(t *testing.T) {
 	}
 
 }
+
+
+func TestIsFilePathStr(t *testing.T) {
+	diff := Diff{}
+
+	if diff.isFilePath("normal string") {
+		t.Errorf("String with no filepath detected as filepath")
+	}
+
+	if !diff.isFilePath("test.txt") {
+		t.Errorf("filepath is not detected properly.")
+	}
+}
