@@ -70,7 +70,7 @@ func (l *LineDataContainer) String() string {
 	return str
 }
 
-func (l *LineDataContainer) isFilePath(str string) bool {
+func isFilePath(str string) bool {
 	match, _ := regexp.MatchString("\\.(\\w+)", str)
 	return match
 }

@@ -40,13 +40,12 @@ func TestDoesNotShowCaseDiffWhenTwoCaseDiff(t *testing.T) {
 
 
 func TestIsFilePathStr(t *testing.T) {
-	lContainer := LineDataContainer{}
 
-	if lContainer.isFilePath("normal string") {
+	if isFilePath("normal string") {
 		t.Errorf("String with no filepath detected as filepath")
 	}
 
-	if !lContainer.isFilePath("test.txt") {
+	if !isFilePath("test.txt") {
 		t.Errorf("filepath is not detected properly.")
 	}
 }
