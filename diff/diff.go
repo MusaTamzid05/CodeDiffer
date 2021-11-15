@@ -1,5 +1,8 @@
 package diff
 
+import (
+	"fmt"
+)
 
 type Diff struct {
 	FirstLineContainer *LineDataContainer
@@ -20,7 +23,15 @@ type LineDiff struct {
 func NewLineDiff(line1, line2 string) *LineDiff {
 	lineDiff := LineDiff{Line1: line1, Line2 : line2}
 	return &lineDiff
+}
 
+func (l *LineDiff) Show() {
+
+	green := "\033[38;5;118m%s\033[39;49m\n"
+	red := "\033[38;5;124m%s\033[39;49m\n"
+
+	fmt.Printf(green,l.Line1)
+	fmt.Printf(red,l.Line2)
 }
 
 
