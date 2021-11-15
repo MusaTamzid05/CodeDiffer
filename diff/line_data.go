@@ -13,9 +13,7 @@ type LineData struct {
 }
 
 func (l *LineData) String() string {
-	str := fmt.Sprintf("Line : %s\n", l.Line)
-	str += fmt.Sprintf("Original Index : %d\n", l.OriginalIndex)
-	str += fmt.Sprintf("New Index : %d\n", l.NewIndex)
+	str := fmt.Sprintf("Line no (%d): %s", l.OriginalIndex,  l.Line)
 
 	return str
 }

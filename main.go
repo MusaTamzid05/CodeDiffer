@@ -23,4 +23,10 @@ func main() {
 
 	fmt.Println(result.Count)
 
+	for _, diff := range result.LineDiffs {
+		fmt.Println(diff.Line1)
+		fmt.Println(diff.Line2)
+		fmt.Println()
+	}
+
 }

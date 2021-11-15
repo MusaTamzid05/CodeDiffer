@@ -1,8 +1,5 @@
 package diff
 
-import (
-	"fmt"
-)
 
 type Diff struct {
 	FirstLineContainer *LineDataContainer
@@ -15,13 +12,13 @@ type Diff struct {
 
 
 type LineDiff struct {
-	missMatchString1 string
-	missMatchString2 string
+	Line1 string
+	Line2 string
 }
 
 
 func NewLineDiff(line1, line2 string) *LineDiff {
-	lineDiff := LineDiff{missMatchString1 : line1, missMatchString2 : line2}
+	lineDiff := LineDiff{Line1: line1, Line2 : line2}
 	return &lineDiff
 
 }
@@ -68,13 +65,8 @@ func (d *Diff) Run() *DiffResult  {
 		secondProcessedLine := preprocessor.Process(secondLineData.Line)
 		
 		if firstProcessedLine != secondProcessedLine {
-			fmt.Println("========================")
-			fmt.Println(firstLineData.String())
-			fmt.Println(secondLineData.String())
-			fmt.Println("========================")
-
 			diffResult.Count += 1
-			diffResult.LineDiffs = append(diffResult.LineDiffs, NewLineDiff(firstProcessedLine, secondProcessedLine) )
+			diffResult.LineDiffs = append(diffResult.LineDiffs, NewLineDiff( "> "+  firstLineData.String(), "< " + secondLineData.String()) )
 		}
 	}
 
