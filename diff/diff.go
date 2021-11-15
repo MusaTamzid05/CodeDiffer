@@ -2,7 +2,6 @@ package diff
 
 import (
 	"fmt"
-	"regexp"
 )
 
 type Diff struct {
@@ -86,10 +85,6 @@ func NewDiff(firstFilePath, secondFilePath string) (*Diff, error){
 	return &Diff{FirstLineContainer : firstLineContainer , SecondLineContainer : secondLineContainer}, nil
 }
 
-func (d *Diff) isFilePath(str string) bool {
-	match, _ := regexp.MatchString("\\.(\\w+)", str)
-	return match
-}
 
 func (d *Diff) Run() *DiffResult  {
 
